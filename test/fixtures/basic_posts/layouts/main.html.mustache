@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="assets/main.css" />
+
+    <title>{{config.site_name}} - {{page.frontmatter.title}}</title>
+  </head>
+  <body>
+    <header>
+      {{#pages}}<a href="{{slug}}.html">{{title}}</a>{{/pages}}
+    </header>
+    <h1>{{config.site_name}} - {{page.frontmatter.title}}</h1>
+
+    <h2>Posts</h2>
+
+    <main>
+      <ul>
+        {{#posts}}
+          <li>
+            <h3><a href="{{slug}}.html">{{title}}</a></h3>
+            <p><{{summary}}</p>
+          </li>
+        {{/posts}}
+      </ul>
+    </main>
+  </body>
+</html>
