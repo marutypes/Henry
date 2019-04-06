@@ -19,11 +19,11 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] 'henry layout' to generate a basic layout
 - [x] 'henry new' to generate an empty project
 - [x] also works as mix tasks
-- [ ] sort posts by date
+- [x] sort posts by date
 - [ ] RSS feed generation
 - [ ] build frontend assets with parcel
-- [ ] 'henry watch' to rebuild on file change and run a dev server
 - [ ] a solid default theme
+- [ ] 'henry watch' to rebuild on file change and run a dev server
 - [ ] actual good SEO
 - [ ] partials
 - [ ] post pagination

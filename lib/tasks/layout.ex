@@ -21,7 +21,7 @@ defmodule Mix.Tasks.Henry.Layout do
   defp parse_args(args) do
     OptionParser.parse(args,
       strict: [help: :boolean, template: :string, project: :string],
-      aliases: [h: :help, p: :project]
+      aliases: [h: :help, p: :project, t: :template]
     )
   end
 
@@ -56,7 +56,18 @@ defmodule Mix.Tasks.Henry.Layout do
     """
     <!DOCTYPE html>
     <html lang="en">
-      #{head()}
+      <head>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      <meta name="theme-color" content="#000000" />
+      <link rel="stylesheet" href="assets/main.css" />
+
+      <title>{{config.site_name}} - {{page.frontmatter.title}}</title>
+    </head>
+
       <body>
         <header>
           {{#pages}}<a href="{{slug}}.html">{{title}}</a>{{/pages}}
@@ -70,7 +81,9 @@ defmodule Mix.Tasks.Henry.Layout do
             {{#posts}}
               <li>
                 <h3><a href="{{slug}}.html">{{title}}</a></h3>
-                <p><{{summary}}</p>
+                <p>By: {{author}}</p>
+                <p>On: {{date}}</p>
+                <p>{{summary}}</p>
               </li>
             {{/posts}}
           </ul>
@@ -90,8 +103,9 @@ defmodule Mix.Tasks.Henry.Layout do
           {{#pages}}<a href="{{slug}}.html">{{title}}</a>{{/pages}}
         </header>
         <h1>{{page.frontmatter.title}}</h1>
-
-        {{{page.content}}}
+        <p>By: {{author}}</p>
+        <p>On: {{date}}</p>
+        <p>{{{content}}}</p>
       </body>
     </html>
     """
@@ -106,7 +120,6 @@ defmodule Mix.Tasks.Henry.Layout do
         <header>
           {{#pages}}<a href="{{slug}}.html">{{title}}</a>{{/pages}}
         </header>
-        <h1>{{config.site_name}} - {{page.frontmatter.title}}</h1>
         {{{page.content}}}
       </body>
     </html>

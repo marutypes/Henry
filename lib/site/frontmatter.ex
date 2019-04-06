@@ -3,7 +3,8 @@ defmodule Henry.Site.Frontmatter do
             slug: "",
             title: "",
             date: "",
-            summary: ""
+            summary: "",
+            author: ""
 
   alias Henry.Site
   alias Henry.Utilities.Cast

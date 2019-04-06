@@ -17,7 +17,7 @@ defmodule Mix.Tasks.Henry.New do
 
   defp parse_args(args) do
     OptionParser.parse(args,
-      strict: [help: :boolean, project: :string, name: :string],
+      strict: [help: :boolean, project: :string],
       aliases: [h: :help, p: :project]
     )
   end

@@ -21,7 +21,7 @@ defmodule Mix.Tasks.Henry.Post do
   defp parse_args(args) do
     OptionParser.parse(args,
       strict: [help: :boolean, project: :string, summary: :string],
-      aliases: [h: :help, p: :project]
+      aliases: [h: :help, p: :project, s: :summary]
     )
   end
 
@@ -45,8 +45,8 @@ defmodule Mix.Tasks.Henry.Post do
     project = switches[:project] || "."
     summary = switches[:summary] || "."
     slug = Slug.slugify(title)
-    date = Date.utc_today()
-    path = Path.join([project, "posts", "#{slug}-#{date}.md"])
+    date = DateTime.utc_now()
+    path = Path.join([project, "posts", "#{slug}.md"])
 
     IO.puts("Creating new post at #{path}")
 
@@ -64,6 +64,7 @@ defmodule Mix.Tasks.Henry.Post do
     ---
 
     # #{title}
+    #{summary}
     """
   end
 end

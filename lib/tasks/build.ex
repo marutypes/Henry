@@ -7,11 +7,7 @@ defmodule Mix.Tasks.Henry.Build do
   @moduledoc """
   builds your site
 
-  usage:
-    henry build #{Colors.highlight("--project=<project>")}
-
-  shortform:
-    henry build #{Colors.highlight("<project>")}
+  usage: henry build #{Colors.highlight("<project>")}
   """
 
   @impl Mix.Task
@@ -78,14 +74,8 @@ defmodule Mix.Tasks.Henry.Build do
         Map.from_struct(page)
         | frontmatter: Map.from_struct(frontmatter)
       },
-      pages:
-        Enum.map(pages, fn %Site.Page{frontmatter: frontmatter} ->
-          Map.from_struct(frontmatter)
-        end),
-      posts:
-        Enum.map(posts, fn %Site.Page{frontmatter: frontmatter} ->
-          Map.from_struct(frontmatter)
-        end),
+      pages: normalized(pages),
+      posts: normalized(posts),
       config: Map.from_struct(config),
       theme: Map.from_struct(theme_files)
     }
@@ -169,5 +159,14 @@ defmodule Mix.Tasks.Henry.Build do
 
   defp asset_path(%Site.Config{out_dir: out_dir}) do
     Path.join(out_dir, "assets")
+  end
+
+  defp normalized(posts) do
+    posts
+    |> Enum.map(fn %Site.Page{frontmatter: frontmatter} ->
+      Map.from_struct(frontmatter)
+    end)
+    |> Enum.sort_by(fn %{date: date} -> date end)
+    |> Enum.reverse
   end
 end

@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Henry.Page do
   defp parse_args(args) do
     OptionParser.parse(args,
       strict: [help: :boolean, project: :string, layout: :string],
-      aliases: [h: :help, p: :project]
+      aliases: [h: :help, p: :project, l: :layout]
     )
   end
 
