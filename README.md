@@ -8,7 +8,7 @@ Henry is a simple static site generator written in Elixir. The name Henry refers
 
 Henry was mostly made to help me learn Elixir and as motivation to rebuild my personal site. If you are already an Elixir developer, building stuff using `mix` tasks is pretty nice. Otherwise maybe you just feel like being a hipster and eschewing the popular static site generators. If looking for a mature solution to build stuff for your job, maybe check out https://www.staticgen.com/ first :)
 
-## Feature roadmap
+## Roadmap
 
 - [x] page parsing / rendering
 - [x] multiple layouts
@@ -23,7 +23,9 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] RSS feed generation
 - [ ] support images for posts
 - [ ] build frontend assets with parcel
-- [ ] a solid default theme
+- [ ] better testing strategy
+- [ ] add a solid default theme
+- [ ] Release on hex
 - [ ] 'henry watch' to rebuild on file change and run a dev server
 - [ ] actual good SEO
 - [ ] partials
@@ -33,10 +35,16 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 
 ## Installation
 
-Henry supports usage as a standalone script or a set of [mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html) tasks.
+Henry supports usage as a standalone script or usage via [mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html).
 
 ### Prebuilt
-**Prebuilt releases are coming soon.**
+Check out the [releases](https://github.com/TheMallen/Henry/releases) tab for prebuild escript releases.
+
+You will need erlang installed on your machine to run the escript distribution.
+
+### Using mix
+
+**Coming soon ;)**
 
 ### From source
 
@@ -57,14 +65,17 @@ Next we fetch our dependencies, don't worry there's only a couple.
 mix deps.get
 ```
 
-### Build as an escript
+### Build
 In your local copy of the Henry repo
 
 ```
-mix do deps.get, escript.build
+mix escript.build
 ```
 
-This will generate an [escript](https://elixirschool.com/en/lessons/advanced/escripts/) in the directory named `henry`. If you add `./henry` to your `PATH` you will be able to run it from anywhere. To start, try creating a new site.
+This will generate an [escript](https://elixirschool.com/en/lessons/advanced/escripts/) in the directory named `henry`.
+
+### Add henry to your path
+Depending on your operating system and shell, the way you accomplish this will vary. If you're on Mac OS, check out [this stackexchange question](https://apple.stackexchange.com/questions/41542/adding-a-new-executable-to-the-path-environment-variable).
 
 ## Usage
 
