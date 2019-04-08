@@ -26,7 +26,10 @@ defmodule Henry.MixProject do
       {:earmark, "~> 1.3.2"},
       {:mustachex, "~> 0.0.2"},
       {:slugify, "~> 1.1"},
-      {:timex, "~> 3.1"}
+      {:timex, "~> 3.1"},
+      # We need this to allow escript builds with timex
+      # See https://hexdocs.pm/timex/Timex.html#module-timex-with-escript
+      {:tzdata, "~> 0.1.8", override: true}
     ]
   end
 
