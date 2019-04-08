@@ -21,6 +21,7 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] also works as mix tasks
 - [x] sort posts by date
 - [x] RSS feed generation
+- [ ] support images for posts
 - [ ] build frontend assets with parcel
 - [ ] a solid default theme
 - [ ] 'henry watch' to rebuild on file change and run a dev server
@@ -56,16 +57,7 @@ Next we fetch our dependencies, don't worry there's only a couple.
 mix deps.get
 ```
 
-#### Option 1: registering mix tasks
-In your local copy of the Henry repo
-
-```
-mix do deps.get, archive.build, archive.install
-```
-
-This will load the tasks into your local installation of `mix`. Afterwards you will be able to run henry tasks like any other `mix` command. To start, try creating a new site.
-
-#### Option 2: building an escript
+### Build as an escript
 In your local copy of the Henry repo
 
 ```
@@ -78,16 +70,11 @@ This will generate an [escript](https://elixirschool.com/en/lessons/advanced/esc
 
 ** In depth docs coming soon **
 
-### As a mix task
-```bash
-  # bootstrap a project
-  mix henry.new "My Rad Website"
-  cd ./my-rad-website
-  # build the static files to /build
-  mix henry.build
-```
+### With mix
 
-#### As an escript
+Once Henry is released to hex you will be able to use it as a dependency in mix projects.
+
+### As an escript
 ```bash
   # bootstrap a project
   henry new "My Rad Website"
