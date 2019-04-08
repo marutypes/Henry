@@ -11,7 +11,7 @@
 /doc/
 
 # Built files inside of test fixtues
-/test/fixtures/**/dist/**/*
+/test/fixtures/**/build/**/*
 
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch

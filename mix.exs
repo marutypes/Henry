@@ -25,7 +25,8 @@ defmodule Henry.MixProject do
       {:yaml_elixir, "~> 2.1.0"},
       {:earmark, "~> 1.3.2"},
       {:mustachex, "~> 0.0.2"},
-      {:slugify, "~> 1.1"}
+      {:slugify, "~> 1.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 

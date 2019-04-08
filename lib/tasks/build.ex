@@ -41,7 +41,8 @@ defmodule Mix.Tasks.Henry.Build do
          :ok <- prepare_directories(site),
          {:ok, rendered_pages} <- render_pages(site),
          :ok <- write_files(rendered_pages),
-         {:ok, _} <- copy_assets(site) do
+         {:ok, _} <- copy_assets(site),
+         :ok <- handle_rss(site) do
       IO.puts([
         Colors.success('Successfully built site!')
       ])
@@ -91,7 +92,7 @@ defmodule Mix.Tasks.Henry.Build do
   end
 
   defp prepare_directories(%Site{config: config}) do
-    # We rely on mkdirp to make the intermediary /dist folder
+    # We rely on mkdirp to make the intermediary /build folder
     case File.mkdir_p(asset_path(config)) do
       {:error, :eexist} -> :ok
       otherwise -> otherwise
@@ -168,5 +169,26 @@ defmodule Mix.Tasks.Henry.Build do
     end)
     |> Enum.sort_by(fn %{date: date} -> date end)
     |> Enum.reverse
+  end
+
+  defp handle_rss(%Site{
+    config: %Site.Config{generate_rss: false}
+  }) do
+    :ok
+  end
+
+  defp handle_rss(%Site{
+    posts: []
+  }) do
+    :ok
+  end
+
+  defp handle_rss(%Site{
+    config: %Site.Config{generate_rss: true} = config,
+  } = site) do
+    feed = Site.RSS.render_from_site(site)
+    path = Path.join(config.out_dir, "rss.xml")
+
+    File.write(path, feed)
   end
 end

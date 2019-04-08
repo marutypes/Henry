@@ -9,6 +9,7 @@ defmodule Mix.Tasks.Henry.Post do
     available switches:
       --project             Path to the Henry site to use (defaults to `.`)
       --summary             A quick summary of this post
+      --author              Who wrote this post
   """
 
   @impl Mix.Task
@@ -20,8 +21,8 @@ defmodule Mix.Tasks.Henry.Post do
 
   defp parse_args(args) do
     OptionParser.parse(args,
-      strict: [help: :boolean, project: :string, summary: :string],
-      aliases: [h: :help, p: :project, s: :summary]
+      strict: [help: :boolean, project: :string, summary: :string, author: :string],
+      aliases: [h: :help, p: :project, s: :summary, a: :author]
     )
   end
 
@@ -43,27 +44,28 @@ defmodule Mix.Tasks.Henry.Post do
 
   defp post({switches, [title], _}) do
     project = switches[:project] || "."
-    summary = switches[:summary] || "."
+    summary = switches[:summary] || ""
+    author = switches[:author] || ""
     slug = Slug.slugify(title)
     date = DateTime.utc_now()
     path = Path.join([project, "posts", "#{slug}.md"])
 
-    IO.puts("Creating new post at #{path}")
+    IO.puts("Creating new post at #{Colors.highlight(path)}")
 
-    post = content(title, date, summary)
+    post = content(title, date, summary, author)
     File.write!(path, post)
   end
 
-  defp content(title, date, summary) do
+  defp content(title, date, summary, author) do
     """
     ---
     title: #{title}
-    summary: #{summary}
-    layout: post
     date: #{date}
+    summary: #{summary}
+    author: #{author}
+    layout: post
     ---
 
-    # #{title}
     #{summary}
     """
   end

@@ -47,7 +47,7 @@ defmodule Mix.Tasks.Henry.Layout do
 
     path = Path.join([project, "layouts", "#{name}.html"])
 
-    IO.puts("Creating new layout at #{path}")
+    IO.puts("Creating new layout at #{Colors.highlight(path)}")
     layout = content(template)
     File.write!(path, layout)
   end
@@ -64,6 +64,7 @@ defmodule Mix.Tasks.Henry.Layout do
       />
       <meta name="theme-color" content="#000000" />
       <link rel="stylesheet" href="assets/main.css" />
+      <link rel="alternate" type="application/rss+xml" href="rss.xml" title="{{config.site_name}}">
 
       <title>{{config.site_name}} - {{page.frontmatter.title}}</title>
     </head>
@@ -103,9 +104,9 @@ defmodule Mix.Tasks.Henry.Layout do
           {{#pages}}<a href="{{slug}}.html">{{title}}</a>{{/pages}}
         </header>
         <h1>{{page.frontmatter.title}}</h1>
-        <p>By: {{author}}</p>
-        <p>On: {{date}}</p>
-        <p>{{{content}}}</p>
+        <p>By: {{page.frontmatter.author}}</p>
+        <p>On: {{page.frontmatter.date}}</p>
+        <p>{{{page.content}}}</p>
       </body>
     </html>
     """

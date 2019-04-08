@@ -20,7 +20,7 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] 'henry new' to generate an empty project
 - [x] also works as mix tasks
 - [x] sort posts by date
-- [ ] RSS feed generation
+- [x] RSS feed generation
 - [ ] build frontend assets with parcel
 - [ ] a solid default theme
 - [ ] 'henry watch' to rebuild on file change and run a dev server
@@ -28,6 +28,7 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [ ] partials
 - [ ] post pagination
 - [ ] themes from github
+- [ ] Service worker generation
 
 ## Installation
 
@@ -82,7 +83,7 @@ This will generate an [escript](https://elixirschool.com/en/lessons/advanced/esc
   # bootstrap a project
   mix henry.new "My Rad Website"
   cd ./my-rad-website
-  # build the static files to /dist
+  # build the static files to /build
   mix henry.build
 ```
 
@@ -91,6 +92,6 @@ This will generate an [escript](https://elixirschool.com/en/lessons/advanced/esc
   # bootstrap a project
   henry new "My Rad Website"
   cd ./my-rad-website
-  # build the static files to /dist
+  # build the static files to /build
   henry build
 ```

@@ -6,6 +6,11 @@ defmodule Mix.Tasks.Henry.New do
     bootstrap a new Henry site
 
     usage: henry new #{Colors.highlight("<site>")}
+
+    available switches:
+    --description         A description of your site for your RSS feed and meta tags
+    --url                 The production url for your site
+    --author              Your name
   """
 
   @impl Mix.Task
@@ -17,8 +22,8 @@ defmodule Mix.Tasks.Henry.New do
 
   defp parse_args(args) do
     OptionParser.parse(args,
-      strict: [help: :boolean, project: :string],
-      aliases: [h: :help, p: :project]
+      strict: [help: :boolean, description: :string, url: :string, author: :string],
+      aliases: [h: :help, d: :description, u: :url, a: :author]
     )
   end
 
@@ -38,7 +43,7 @@ defmodule Mix.Tasks.Henry.New do
     """)
   end
 
-  defp new({_, [site], _}) do
+  defp new({switches, [site], _}) do
     project = Slug.slugify(site)
     IO.puts("Creating a new Henry site at ./#{project}")
 
@@ -49,22 +54,29 @@ defmodule Mix.Tasks.Henry.New do
       File.mkdir_p!(folder)
     end
 
-    File.write(config_path, henry_yml(site))
+    File.write(config_path, henry_yml(switches, site))
 
     Mix.Tasks.Henry.Layout.run(["main", "--project", project, "--template", "main"])
     Mix.Tasks.Henry.Layout.run(["post", "--project", project, "--template", "post"])
     Mix.Tasks.Henry.Layout.run(["page", "--project", project, "--template", "page"])
-    Mix.Tasks.Henry.Post.run(["My Radical First Post", "--project", project])
+    Mix.Tasks.Henry.Post.run([
+      "My First Post",
+      "--project", project,
+      "--author", switches[:author] || "",
+      "--summary", "My first henry post"
+    ])
     Mix.Tasks.Henry.Page.run(["index", "--project", project, "--layout", "main"])
     Mix.Tasks.Henry.Page.run(["about", "--project", project, "--layout", "page"])
     IO.puts("#{Colors.success("Success!")}")
   end
 
-  defp henry_yml(name) do
+  defp henry_yml(switches, name) do
     """
     ---
-    author: someone
     site_name: #{name}
+    site_url: #{switches[:url] || "http://www.mysite.com"}
+    description: #{switches[:description] || "A Henry site"}
+    author: #{switches[:author] || "someone"}
     """
   end
 

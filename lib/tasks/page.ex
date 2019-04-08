@@ -48,7 +48,7 @@ defmodule Mix.Tasks.Henry.Page do
     slug = Slug.slugify(title)
     path = Path.join([project, "pages", "#{slug}.md"])
 
-    IO.puts("Creating new page at #{path}")
+    IO.puts("Creating new page at #{Colors.highlight(path)}")
 
     page = content(title, layout)
     File.write!(path, page)
