@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Henry.Post do
   use Mix.Task
   alias Henry.Utilities.Colors
+
   @moduledoc """
     generates an empty post
 

@@ -21,7 +21,7 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] also works as mix tasks
 - [x] sort posts by date
 - [x] RSS feed generation
-- [ ] support images for posts
+- [x] support images for posts
 - [ ] build frontend assets with parcel
 - [ ] better testing strategy
 - [ ] add a solid default theme

@@ -4,7 +4,8 @@ defmodule Henry.Site.Frontmatter do
             title: "",
             date: "",
             summary: "",
-            author: ""
+            author: "",
+            image: false
 
   alias Henry.Site
   alias Henry.Utilities.Cast

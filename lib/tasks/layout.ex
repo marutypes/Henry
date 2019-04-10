@@ -85,6 +85,7 @@ defmodule Mix.Tasks.Henry.Layout do
                 <p>By: {{author}}</p>
                 <p>On: {{date}}</p>
                 <p>{{summary}}</p>
+                {{#image}}<img src="{{image.src}}" alt="{{image.alt}}"/>{{/image}}
               </li>
             {{/posts}}
           </ul>

@@ -7,7 +7,7 @@ defmodule Henry.Site.Config do
             out_dir: nil,
             site_url: "",
             language: "en-us",
-            generate_rss: true
+            generate_rss: true,
 
   alias Henry.Utilities.Colors
   alias Henry.Site
