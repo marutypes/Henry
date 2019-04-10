@@ -118,7 +118,12 @@ defmodule Mix.Tasks.Henry.Build do
       IO.puts("Writing #{Colors.highlight(path)}...")
       File.copy(path, asset_path(config, basename))
     end)
-    |> Enum.reduce({:ok, []}, &collect_errors/2)
+    |> Enum.reduce({:ok, []}, fn ({:ok}, _) -> :ok
+      ({:ok, result}, {:ok, previous_results}) ->  {:ok, previous_results ++ [result]}
+      (_, {:error, message}) -> {:error, message}
+      ({:error, message}, {:error, message}) -> {:error, "#{message}, #{message}"}
+      ({:error, message}, _) -> {:error, message}
+    end)
   end
 
   defp collect_errors(:ok, _) do
