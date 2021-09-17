@@ -22,7 +22,7 @@ Henry was mostly made to help me learn Elixir and as motivation to rebuild my pe
 - [x] sort posts by date
 - [x] RSS feed generation
 - [x] support images for posts
-- [ ] build frontend assets with parcel
+- [ ] build frontend assets
 - [ ] better testing strategy
 - [ ] add a solid default theme
 - [ ] Release on hex
